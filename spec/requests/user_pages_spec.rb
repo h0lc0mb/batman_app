@@ -7,8 +7,8 @@ describe "User Pages" do
 	describe "signup page" do
 		before { visit signup_path }
 
-		it { should have_selector('h1', text: 'Join') }
-		it { should have_selector('title', text: full_title('Join')) }
+		it { should have_selector('h1', text: 'Welcome') }
+		#it { should have_selector('title', text: full_title('Welcome')) }
 	end
 
 	describe "profile page" do
@@ -23,7 +23,7 @@ describe "User Pages" do
 
 		before { visit signup_path }
 
-		let(:submit) { "Join" }
+		let(:submit) { "Continue" }
 
 		describe "with invalid information" do
 			it "should not create a user" do
@@ -33,14 +33,23 @@ describe "User Pages" do
 
 		describe "with valid information" do
 			before do
-				fill_in "Name",      with: "Marie Curie"
-				fill_in "Email",     with: "marie@batman.com"
-				fill_in "Password",  with: "radioactive"
-				fill_in "Confirm password", with: "radioactive"
+				fill_in "username",  with: "Marie Curie"
+				fill_in "email",     with: "marie@batman.com"
+				fill_in "password",  with: "radioactive"
+				fill_in "confirm password", with: "radioactive"
 			end
 
 			it "should create a user" do
 				expect { click_button submit }.to change(User, :count).by(1)
+			end
+
+			describe "after saving the user" do
+				before { click_button submit }
+				let(:user) { User.find_by_email('marie@batman.com') }
+
+				it { should have_selector('title', text: user.name) }
+				it { should have_selector('div.alert.alert-success', text: 'welcomes') }
+				it { should have_link('Sign out') }
 			end
 		end
 	end

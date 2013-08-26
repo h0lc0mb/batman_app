@@ -1,24 +1,24 @@
-<% provide(:title, 'Join') %>
-<h1>Join</h1>
-
+<h1>Welcome, grasshopper</h1>
+<h2>Got a physics question?</h2>
+<center><h4>Create a profile and ask away</h4></center>
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
     	<%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
+      <%= f.label :name, "username" %>
       <%= f.text_field :name %>
 
-      <%= f.label :email %>
+      <%= f.label :email, "email" %>
       <%= f.text_field :email %>
 
-      <%= f.label :password %>
+      <%= f.label :password, "password" %>
       <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirm password" %>
+      <%= f.label :password_confirmation, "confirm password" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Join", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Continue", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
