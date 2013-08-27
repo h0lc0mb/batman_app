@@ -53,4 +53,35 @@ describe "User Pages" do
 			end
 		end
 	end
+
+	describe "edit" do
+		let(:user) { FactoryGirl.create(:user) }
+		before do
+			sign_in user
+			visit edit_user_path(user)
+		end
+
+		describe "page" do
+			it { should have_selector('h1',    text: "Update your profile") }
+			it { should have_selector('title', text: "Edit user") }
+		end
+
+		describe "with invalid information" do
+			let(:new_name)  { "Paul Langevin" }
+			let(:new_email) { "paul@batman.com" }
+			before do
+				fill_in "username",         with: new_name
+				fill_in "email",            with: new_email
+				fill_in "password",         with: user.password
+				fill_in "confirm password", with: user.password
+				click_button "Save changes"
+			end
+
+			it { should have_selector('title', text: new_name) }
+			it { should have_selector('div.alert.alert-success') }
+			it { should have_link('Sign out', href: signout_path) }
+			specify { user.reload.name.should  == new_name }
+			specify { user.reload.email.should == new_email }
+		end
+	end
 end
