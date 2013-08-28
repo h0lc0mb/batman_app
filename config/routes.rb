@@ -1,9 +1,10 @@
 BatmanApp::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :posts,    only: [:create, :destroy]
 
-  #root to: 'static_pages#home'
-  root to: 'users#new'
+  root to: 'static_pages#home'
+  #root to: 'users#new'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

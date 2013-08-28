@@ -1,1 +1,19 @@
-Placeholder
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/post_form' %>
+      </section>
+    </aside>
+  </div>  
+<% else %>
+  <div class="center hero-unit">
+    <h1>Physics Ninja</h1>
+    <h2>On-demand answers to any physics question</h2>
+    <h3>Ready to begin?</h3>
+    <%= link_to "Enter", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
+<% end %> 
