@@ -22,5 +22,14 @@ namespace :db do
       content = Faker::Lorem.sentence(5)
       users.each { |user| user.posts.create!(content: content) }
     end
+
+# Need to fix....all answers are pointing to post #300 for some reason
+    posts = Post.all(limit: 50)
+    content = Faker::Lorem.sentence(5)
+    posts.each do |post|
+      response = post.responses.build(content: content)
+      response.user = admin
+      response.save!
+    end
   end
 end

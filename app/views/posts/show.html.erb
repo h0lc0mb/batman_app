@@ -1,0 +1,14 @@
+<h3>Question from <%= link_to @post.user.name, @post.user %></h3>
+<span class="timestamp">
+	Asked <%= time_ago_in_words(@post.created_at) %> ago.
+</span>
+<div class="row">
+	<aside class="span6">
+		<section>
+			<%= @post.content %>
+		</section>
+	</aside>
+	<div class="span6">
+		<%= render 'shared/response_form' %>
+	</div>
+</div>

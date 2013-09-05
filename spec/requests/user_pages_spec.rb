@@ -133,8 +133,10 @@ describe "User Pages" do
 
 	describe "profile page" do
 		let(:user) { FactoryGirl.create(:user) }
-		let!(:m1) { FactoryGirl.create(:post, user: user, content: "Rage") }
-		let!(:m2) { FactoryGirl.create(:post, user: user, content: "Conics") }
+		let!(:p1) { FactoryGirl.create(:post, user: user, content: "What is rage?") }
+		let!(:p2) { FactoryGirl.create(:post, user: user, content: "What are conics?") }
+		let!(:r1) { FactoryGirl.create(:response, post: p1, content: "See: Achilles") }
+		let!(:r2) { FactoryGirl.create(:response, post: p2, content: "See: Conics") }
 
 		before { visit user_path(user) }
 
@@ -142,9 +144,14 @@ describe "User Pages" do
 		it { should have_selector('title', text: user.name) }
 
 		describe "posts" do
-			it { should have_content(m1.content) }
-			it { should have_content(m2.content) }
+			it { should have_content(p1.content) }
+			it { should have_content(p2.content) }
 			it { should have_content(user.posts.count) }
+		end
+
+		describe "responses" do
+			it { should have_content(r1.content) }
+			it { should have_content(r2.content) }
 		end
 	end
 end

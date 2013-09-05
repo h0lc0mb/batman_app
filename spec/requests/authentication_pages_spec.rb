@@ -122,6 +122,24 @@ describe "Authentication" do
 				before { delete user_path(user) }
 				specify { response.should redirect_to(root_url) }
 			end
+
+			describe "visiting the post index" do
+				before { visit posts_path }
+				it { should have_content('Sorry, grasshopper') }
+			end
+
+			describe "in the Responses controller" do
+
+				describe "submitting to the create action" do
+					before { post post_responses_path(FactoryGirl.create(:post)) }
+					specify { response.should redirect_to(root_url) }
+				end
+
+				describe "submitting to the destroy action" do
+					before { delete post_response_path(FactoryGirl.create(:post), FactoryGirl.create(:response)) }
+					specify { response.should redirect_to(root_url) }
+				end
+			end
 		end
 	end
 end

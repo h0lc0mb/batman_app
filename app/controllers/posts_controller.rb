@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :admin_user,     only: [:show, :index]
 
   def create
   	@post = current_user.posts.build(params[:post])
@@ -12,5 +13,17 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def index
+    @posts = Post.all
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    @response = @post.responses.build#(params[:response])
+
+    # Do I need this?
+    #@response.user = current_user
   end
 end

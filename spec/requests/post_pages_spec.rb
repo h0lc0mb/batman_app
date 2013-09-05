@@ -30,4 +30,33 @@ describe "Post pages" do
 			end
 		end
 	end
+
+	describe "as an admin" do
+		let(:admin) { FactoryGirl.create(:admin) }
+		before { sign_in admin }
+		
+		describe "index" do
+			before do
+				FactoryGirl.create(:post, content: 'Is time real?')
+				FactoryGirl.create(:post, content: 'Is space real?')
+				visit posts_path
+			end
+
+			it { should have_selector('title', text: 'All questions') }
+			it { should have_selector('h1',    text: 'All questions') }
+
+			it "should list each post" do
+				Post.all.each do |post|
+					page.should have_selector('li', text: post.content)
+				end
+			end
+		end
+
+		describe "show page" do
+			let(:post) { FactoryGirl.create(:post) }
+			before { visit post_path(post) }
+
+			it { should have_content(post.content) }
+		end
+	end
 end

@@ -1,0 +1,12 @@
+<% provide(:title, 'All questions') %>
+<h1>All questions</h1>
+
+<ul class="posts">
+	<% @posts.each do |post| %>
+		<li>
+			<%= post.content %>
+			<br>
+			<%= link_to "Answer this question", post %>
+		</li>
+	<% end %>
+</ul>

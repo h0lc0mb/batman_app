@@ -14,4 +14,10 @@ FactoryGirl.define do
   	content "What is time?"
   	user
   end
+
+  factory :response do
+    content "Time is an illusion"
+    post
+    user
+  end
 end

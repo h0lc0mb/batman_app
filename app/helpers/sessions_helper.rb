@@ -41,4 +41,12 @@ module SessionsHelper
 	def store_location
 		session[:return_to] = request.url
 	end
+
+	#def admin?
+	#	user.admin == true
+	#end
+
+	def admin_user
+		redirect_to root_url, notice: "Sorry, grasshopper: You must be a ninja to view that page." unless current_user.try(:admin?)
+	end
 end

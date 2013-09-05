@@ -1,7 +1,16 @@
 BatmanApp::Application.routes.draw do
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :posts,    only: [:create, :destroy]
+  resources :sessions,  only: [:new, :create, :destroy]
+  #resources :posts,     only: [:show, :create, :destroy, :index]
+  #resources :responses, only: [:create, :destroy]
+  #resources :posts do
+  #  member do
+  #    get :responses
+  #  end
+  #end
+  resources :posts do
+    resources :responses, only: [:create, :destroy]
+  end
 
   root to: 'static_pages#home'
   #root to: 'users#new'

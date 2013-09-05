@@ -11,6 +11,7 @@ describe Post do
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }
 	its(:user) { should == user }
+	it { should respond_to(:responses) }
 
 	it { should be_valid }
 
@@ -35,5 +36,22 @@ describe Post do
 	describe "with content that is too long" do
 		before { @post.content = "a" * 2501 }
 		it { should_not be_valid }
+	end
+
+	describe "response associations" do
+
+		before { @post.save }
+		let!(:response) do
+			FactoryGirl.create(:response, post: @post)
+		end
+
+		it "should destroy association responses" do
+			responses = @post.responses.dup
+			@post.destroy
+			responses.should_not be_empty
+			responses.each do |response|
+				Response.find_by_id(response.id).should be_nil
+			end
+		end
 	end
 end

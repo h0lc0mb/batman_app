@@ -48,6 +48,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.paginate(page: params[:page])
+    @posts.each do |post|
+      @responses = post.responses
+    end
   end
 
   private
@@ -57,7 +60,7 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
+   # def admin_user
+    #  redirect_to root_url, notice: "Sorry, grasshopper: You must be a ninja to view that page." unless current_user.admin?
+    #end
 end

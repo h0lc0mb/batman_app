@@ -29,6 +29,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:posts) }
+  it { should respond_to(:responses) }
 
 	it { should be_valid }
   it { should_not be_admin }
@@ -160,4 +161,6 @@ describe User do
       end
     end
   end
+
+  # For now, I am *not* making responses get destroyed when submitting user does
 end
