@@ -1,0 +1,31 @@
+<% @user = User.find(params[:id]) %>
+<% @posts = @user.posts.all %>
+<% @posts.each do |post| %>
+<%# @post = Post.find(params[:id]) %>
+	<% if post.responses.any? %>
+		<li>
+			<span class="content">
+				<b>Question:</b>
+				<%= post.content %>
+			</span>
+			<span class="timestamp">
+				Asked <%= time_ago_in_words(post.created_at) %> ago.
+			</span>
+		</li>
+		<% post.responses.each do |response| %>
+			<ol class="responses">
+				<%# I should be doing render @responses here, but whatever %>
+				<li>
+					<span class="response_content">
+						<b>Answer:</b>
+						<%= response.content %>
+					</span>
+					<span class="timestamp">
+						Answered <%= time_ago_in_words(response.created_at) %>
+						ago.
+					</span>
+				</li>
+			</ol>
+		<% end %>
+	<% end %>
+<% end %>

@@ -3,10 +3,6 @@ class UsersController < ApplicationController
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
   
-  def show
-  	@user = User.find(params[:id])
-  end
-  
   def new
   	@user = User.new
   end
@@ -48,6 +44,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.paginate(page: params[:page])
+    # This part probably isn't working--why render @responses doesn't work
     @posts.each do |post|
       @responses = post.responses
     end

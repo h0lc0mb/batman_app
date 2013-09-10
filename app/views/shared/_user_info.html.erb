@@ -2,8 +2,8 @@
 	Hello, <%= current_user.name %>
 </h1>
 <span>
-	<%= link_to "view profile", current_user %>
+	<%= link_to "view responses from the ninja", current_user %>
 </span>
 <span>
-	<%= pluralize(current_user.posts.count, "question") %>
+	<%= pluralize(current_user.posts.count, "question") %> total
 </span>

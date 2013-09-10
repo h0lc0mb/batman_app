@@ -135,6 +135,7 @@ describe "User Pages" do
 		let(:user) { FactoryGirl.create(:user) }
 		let!(:p1) { FactoryGirl.create(:post, user: user, content: "What is rage?") }
 		let!(:p2) { FactoryGirl.create(:post, user: user, content: "What are conics?") }
+		let!(:p3) { FactoryGirl.create(:post, user: user, content: "This one has no answer!")}
 		let!(:r1) { FactoryGirl.create(:response, post: p1, content: "See: Achilles") }
 		let!(:r2) { FactoryGirl.create(:response, post: p2, content: "See: Conics") }
 
@@ -146,7 +147,7 @@ describe "User Pages" do
 		describe "posts" do
 			it { should have_content(p1.content) }
 			it { should have_content(p2.content) }
-			it { should have_content(user.posts.count) }
+			it { should_not have_content(p3.content) }
 		end
 
 		describe "responses" do

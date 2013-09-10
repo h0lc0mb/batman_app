@@ -9,11 +9,12 @@
 	</aside>
 	<div class="span8">
 		<% if @user.posts.any? %>
-			<h3>Questions (<%= @user.posts.count %>)</h3>
+			<h3>Answered questions</h3>
 			<ol class="posts">
-				<%= render @posts %>
+				<%#= render @posts %>
+				<%= render 'posts/answered_post', collection: @posts %>
 			</ol>
-			<%= will_paginate @posts %>
+			<%#= will_paginate @posts %>
 		<% end %>
 	</div>
 </div>

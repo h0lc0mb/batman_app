@@ -1,5 +1,14 @@
 <% provide(:title, 'All questions') %>
 <h1>All questions</h1>
+<center>
+	<b>
+		<font size="4">
+			<%= link_to "View pending questions", pending_path %>
+			&nbsp &nbsp
+			<%= link_to "View answered questions", answered_path %>
+		</font>
+	</b>
+</center>
 
 <ul class="posts">
 	<% @posts.each do |post| %>
@@ -10,3 +19,5 @@
 		</li>
 	<% end %>
 </ul>
+
+<%= will_paginate %>

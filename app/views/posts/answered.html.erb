@@ -1,0 +1,18 @@
+<% provide(:title, 'Answered questions') %>
+<h1>Answered questions</h1>
+
+<ul class="posts">
+	<% @posts.each do |post| %>
+		<% if post.responses.any? %>
+			<li>
+				<%= post.content %>
+				<br>
+				<%= link_to "Answer this question", post %>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+
+<%# Pagination goes over *all* posts--need to do for subset
+<%# This is a simple fix, but not straightforward enough to fix right now
+<%#= will_paginate %>

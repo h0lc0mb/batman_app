@@ -16,6 +16,14 @@ class PostsController < ApplicationController
   end
 
   def index
+    @posts = Post.paginate(page: params[:page])
+  end
+
+  def pending
+    @posts = Post.all
+  end
+
+  def answered
     @posts = Post.all
   end
 

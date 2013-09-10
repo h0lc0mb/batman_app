@@ -23,6 +23,9 @@ BatmanApp::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
 
+  match 'pending',  to: 'posts#pending'
+  match 'answered', to: 'posts#answered'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

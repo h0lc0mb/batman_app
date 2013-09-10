@@ -1,0 +1,15 @@
+<% @posts = current_user.posts.all %>
+<% @posts.each do |post| %>
+	<% if post.responses.any? %>
+	<% else %>
+		<li>
+			<span class="content">
+				<b>Question:</b>
+				<%= post.content %>
+			</span>
+			<span class="timestamp">
+				Asked <%= time_ago_in_words(post.created_at) %> ago.
+			</span>
+		</li>
+	<% end %>
+<% end %>
