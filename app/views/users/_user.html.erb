@@ -4,4 +4,7 @@
 		| <%= link_to "delete", user, method: :delete,
 																data: { confirm: "You sure?" } %>
 	<% end %>
+	<div class="pending">
+		<%= user.posts.count %> questions
+	</div>
 </li>

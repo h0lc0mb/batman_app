@@ -5,9 +5,14 @@
 	<% @posts.each do |post| %>
 		<% if post.responses.any? %>
 			<li>
-				<%= post.content %>
-				<br>
-				<%= link_to "Answer this question", post %>
+				<%= truncate(post.content, length: 80) %>
+				<div class="timestamp">
+					Asked by <%= link_to post.user.name %> <%= time_ago_in_words(post.created_at) %> ago.
+				</div>
+				<div class="timestamp">
+					Answered <%= time_ago_in_words(post.responses.first.created_at) %> ago.
+				</div>
+				<%= link_to "View this question", post %>
 			</li>
 		<% end %>
 	<% end %>

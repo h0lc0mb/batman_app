@@ -6,7 +6,7 @@
 		<li>
 			<span class="content">
 				<b>Question:</b>
-				<%= post.content %>
+				<%= simple_format(post.content) %>
 			</span>
 			<span class="timestamp">
 				Asked <%= time_ago_in_words(post.created_at) %> ago.
@@ -18,7 +18,7 @@
 				<li>
 					<span class="response_content">
 						<b>Answer:</b>
-						<%= response.content %>
+						<%= simple_format(response.content) %>
 					</span>
 					<span class="timestamp">
 						Answered <%= time_ago_in_words(response.created_at) %>

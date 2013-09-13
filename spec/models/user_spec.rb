@@ -14,7 +14,7 @@ require 'spec_helper'
 describe User do
 
 	before do
-    @user = User.new(name: "Example User", email: "user@example.com",
+    @user = User.new(name: "ExampleUser", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar")
   end
 
@@ -60,6 +60,11 @@ describe User do
 		before { @user.name = "a" * 51 }
 		it { should_not be_valid }
 	end
+
+  describe "when name includes spaces" do
+    before { @user.name = "Susan Holcomb" }
+    it { should_not be_valid }
+  end
 
 	describe "when email is not present" do
 		before { @user.email = " " }

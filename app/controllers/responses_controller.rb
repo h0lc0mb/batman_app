@@ -8,7 +8,7 @@ class ResponsesController < ApplicationController
 
 		if @response.save
 			flash[:success] = "Many thanks, ninja."
-			redirect_to root_url
+			redirect_to @post
 		else
 			render 'posts/show'
 		end

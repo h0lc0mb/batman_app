@@ -1,7 +1,7 @@
 <li>
  	<span class="response_content">
  		<b>Answer:</b>
- 		<%= response.content %>
+ 		<%= simple_format(response.content) %>
 	</span>
  	<span class="timestamp">
  		Answered <%= time_ago_in_words(response.created_at) %> ago.

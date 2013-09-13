@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :admin_user,     only: [:destroy, :index]
+  before_filter :correct_or_admin,     only: [:show]
   
   def new
   	@user = User.new
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   	if @user.save
       sign_in @user
   		flash[:success] = "The Physics Ninja welcomes you."
-  		redirect_to @user
+  		redirect_to root_path
   	else
   		render 'new'
   	end
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
       sign_in @user
-      redirect_to @user
+      redirect_to root_path
     else
       render 'edit'
     end
@@ -55,6 +56,11 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def correct_or_admin
+      @user = User.find(params[:id])
+      redirect_to root_url, notice: "Sorry, grasshopper: You must be a ninja to view that page." unless current_user?(@user) || current_user.try(:admin?)
     end
 
    # def admin_user

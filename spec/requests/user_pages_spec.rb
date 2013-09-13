@@ -6,10 +6,9 @@ describe "User Pages" do
 
 	describe "index" do
 		
-		let(:user) { FactoryGirl.create(:user) }
-
-		before(:each) do
-			sign_in user
+		let(:admin) { FactoryGirl.create(:admin) }
+		before do
+			sign_in admin
 			visit users_path
 		end
 
@@ -30,23 +29,15 @@ describe "User Pages" do
 			end
 		end
 
+		# idk why these are failing bc they appear to work in the app
+
 		describe "delete links" do
 
-			it { should_not have_link('delete') }
-
-			describe "as an admin user" do
-				let(:admin) { FactoryGirl.create(:admin) }
-				before do
-					sign_in admin
-					visit users_path
-				end
-
-				it { should have_link('delete', href: user_path(User.first)) }
-				it "should be able to delete another user" do
-					expect { click_link('delete') }.to change(User, :count).by(-1)
-				end
-				it { should_not have_link('delete', href: user_path(admin)) }
+			it { should have_link('delete', href: user_path(User.first)) }
+			it "should be able to delete another user" do
+				expect { click_link('delete') }.to change(User, :count).by(-1)
 			end
+			it { should_not have_link('delete', href: user_path(admin)) }
 		end
 	end
 
@@ -55,14 +46,6 @@ describe "User Pages" do
 
 		it { should have_selector('h1', text: 'Welcome') }
 		#it { should have_selector('title', text: full_title('Welcome')) }
-	end
-
-	describe "profile page" do
-		let(:user) { FactoryGirl.create(:user) }
-		before { visit user_path(user) }
-
-		it { should have_selector('h1',    text: user.name) }
-		it { should have_selector('title', text: user.name) }
 	end
 
 	describe "signup" do
@@ -79,7 +62,7 @@ describe "User Pages" do
 
 		describe "with valid information" do
 			before do
-				fill_in "username",  with: "Marie Curie"
+				fill_in "username",  with: "MarieCurie"
 				fill_in "email",     with: "marie@batman.com"
 				fill_in "password",  with: "radioactive"
 				fill_in "confirm password", with: "radioactive"
@@ -93,7 +76,8 @@ describe "User Pages" do
 				before { click_button submit }
 				let(:user) { User.find_by_email('marie@batman.com') }
 
-				it { should have_selector('title', text: user.name) }
+				it { should have_content('Pending') }
+				#it { should have_selector('title', text: user.name) }
 				it { should have_selector('div.alert.alert-success', text: 'welcomes') }
 				it { should have_link('Sign out') }
 			end
@@ -113,7 +97,7 @@ describe "User Pages" do
 		end
 
 		describe "with invalid information" do
-			let(:new_name)  { "Paul Langevin" }
+			let(:new_name)  { "PaulLangevin" }
 			let(:new_email) { "paul@batman.com" }
 			before do
 				fill_in "username",         with: new_name
@@ -123,7 +107,8 @@ describe "User Pages" do
 				click_button "Save changes"
 			end
 
-			it { should have_selector('title', text: new_name) }
+			it { should have_content('Pending') }
+			#it { should have_selector('title', text: new_name) }
 			it { should have_selector('div.alert.alert-success') }
 			it { should have_link('Sign out', href: signout_path) }
 			specify { user.reload.name.should  == new_name }
@@ -132,6 +117,7 @@ describe "User Pages" do
 	end
 
 	describe "profile page" do
+
 		let(:user) { FactoryGirl.create(:user) }
 		let!(:p1) { FactoryGirl.create(:post, user: user, content: "What is rage?") }
 		let!(:p2) { FactoryGirl.create(:post, user: user, content: "What are conics?") }
@@ -141,18 +127,29 @@ describe "User Pages" do
 
 		before { visit user_path(user) }
 
-		it { should have_selector('h1',    text: user.name) }
-		it { should have_selector('title', text: user.name) }
+		it { should have_content('Sorry, grasshopper') }
 
-		describe "posts" do
-			it { should have_content(p1.content) }
-			it { should have_content(p2.content) }
-			it { should_not have_content(p3.content) }
-		end
+		describe "as an admin" do
 
-		describe "responses" do
-			it { should have_content(r1.content) }
-			it { should have_content(r2.content) }
+			let(:admin) { FactoryGirl.create(:admin) }
+			before do
+				sign_in admin
+				visit user_path(user)
+			end
+
+			it { should have_selector('h1',    text: user.name) }
+			it { should have_selector('title', text: user.name) }
+
+			describe "posts" do
+				it { should have_content(p1.content) }
+				it { should have_content(p2.content) }
+				it { should_not have_content(p3.content) }
+			end
+
+			describe "responses" do
+				it { should have_content(r1.content) }
+				it { should have_content(r2.content) }
+			end
 		end
 	end
 end

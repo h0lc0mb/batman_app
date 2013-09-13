@@ -5,10 +5,14 @@
 		<li>
 			<span class="content">
 				<b>Question:</b>
-				<%= post.content %>
+				<%= simple_format(post.content) %>
 			</span>
 			<span class="timestamp">
 				Asked <%= time_ago_in_words(post.created_at) %> ago.
+			</span>
+			&nbsp
+			<span class="pending">
+				Awaiting response
 			</span>
 		</li>
 	<% end %>

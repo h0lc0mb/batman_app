@@ -3,6 +3,7 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$grayMediumDark: #686868;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -200,6 +201,16 @@ input {
 }
 .timestamp {
   color: $grayLight;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+.pending {
+  color: $grayMediumDark;
+  font-style: italic;
 }
 aside {
   textarea {

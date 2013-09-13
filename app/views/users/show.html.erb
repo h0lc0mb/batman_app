@@ -5,11 +5,18 @@
 			<h1>
 				<%= @user.name %>
 			</h1>
+			<span>
+				<%= pluralize(@user.posts.count, "question") %> total
+			</span>
+			<br>
+			<span>
+				<%= link_to "ask a new question", root_path %>
+			</span>
 		</section>
 	</aside>
 	<div class="span8">
+		<h3>Answered questions</h3>
 		<% if @user.posts.any? %>
-			<h3>Answered questions</h3>
 			<ol class="posts">
 				<%#= render @posts %>
 				<%= render 'posts/answered_post', collection: @posts %>

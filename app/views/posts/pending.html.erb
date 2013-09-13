@@ -6,8 +6,10 @@
 		<% if post.responses.any? %>
 		<% else %>
 			<li>
-				<%= post.content %>
-				<br>
+				<%= truncate(post.content, length: 80) %>
+				<div class="timestamp">
+					Asked by <%= link_to post.user.name %> <%= time_ago_in_words(post.created_at) %> ago.
+				</div>
 				<%= link_to "Answer this question", post %>
 			</li>
 		<% end %>

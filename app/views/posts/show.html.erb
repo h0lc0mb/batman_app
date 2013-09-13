@@ -5,10 +5,20 @@
 <div class="row">
 	<aside class="span6">
 		<section>
-			<%= @post.content %>
+			<%= simple_format(@post.content) %>
 		</section>
 	</aside>
 	<div class="span6">
+		<% if @post.responses.any? %>
+			<ul class="posts">
+				<% @post.responses.each do |response| %>
+					<li>
+						<%= simple_format(response.content) %>
+						<%#= render @response %>
+					</li>
+				<% end %>
+			</ul>
+		<% end %>
 		<%= render 'shared/response_form' %>
 	</div>
 </div>

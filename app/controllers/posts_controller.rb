@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
-  before_filter :admin_user,     only: [:show, :index]
+  before_filter :admin_user,     only: [:show, :index, :pending, :answered]
 
   def create
   	@post = current_user.posts.build(params[:post])
