@@ -5,6 +5,8 @@
 <div class="row">
 	<aside class="span6">
 		<section>
+			<br>
+			<b>Question:</b> 
 			<%= simple_format(@post.content) %>
 		</section>
 	</aside>
@@ -13,6 +15,7 @@
 			<ul class="posts">
 				<% @post.responses.each do |response| %>
 					<li>
+						<b>Answer: </b>
 						<%= simple_format(response.content) %>
 						<%#= render @response %>
 					</li>
