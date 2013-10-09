@@ -26,6 +26,8 @@ BatmanApp::Application.routes.draw do
   match 'pending',  to: 'posts#pending'
   match 'answered', to: 'posts#answered'
 
+  match 'users/:id/toggle_admin', to: 'users#toggle_admin'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

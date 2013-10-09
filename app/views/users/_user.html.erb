@@ -1,10 +1,22 @@
 <li>
 	<%= link_to user.name, user %>
 	<% if current_user.admin? && !current_user?(user) %>
-		| <%= link_to "delete", user, method: :delete,
+		
+		<% if !user.admin? %>
+			| <%= link_to "make admin", { controller: :users, action: :toggle_admin, id: user.id }, 
+																											data: { confirm: "Give this user ninja powers?" } %>
+			| <%= link_to "delete", user, method: :delete,
 																data: { confirm: "You sure?" } %>
+		<% else %>
+			| verified ninja
+		<% end %>
+	<% end %>
+	<% if current_user.admin? && current_user?(user) %>
+		| verified ninja
 	<% end %>
 	<div class="pending">
 		<%= user.posts.count %> questions
 	</div>
 </li>
+
+<%# data: { confirm: "Is this user a verified ninja?" } %>

@@ -33,11 +33,24 @@ describe "User Pages" do
 
 		describe "delete links" do
 
-			it { should have_link('delete', href: user_path(User.first)) }
+			let(:user) { FactoryGirl.create(:user) }
+
+			it { should have_link('delete', href: user_path(user)) }
 			it "should be able to delete another user" do
 				expect { click_link('delete') }.to change(User, :count).by(-1)
 			end
 			it { should_not have_link('delete', href: user_path(admin)) }
+		end
+
+		describe "admin links" do
+
+			let(:user) { FactoryGirl.create(:user) }
+
+			it { should have_link('make admin', href: user_path(user)) }
+			it "should be able to make another user an admin" do
+				expect { click_link('make admin') }.to change { user.admin }
+			end
+			it { should_not have_link('make admin', href: user_path(admin)) }
 		end
 	end
 

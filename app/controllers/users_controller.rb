@@ -19,6 +19,13 @@ class UsersController < ApplicationController
   	end
   end
 
+  def toggle_admin
+    @user = User.find(params[:id])
+    @user.toggle!(:admin)
+    flash[:success] = "Newly minted ninja!"
+    redirect_to users_path
+  end
+
   def edit
   end
 
