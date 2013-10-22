@@ -13,6 +13,17 @@
 				<%= link_to "ask a new question", root_path %>
 			</span>
 		</section>
+		<%# Currently won't work bc it tries to do users/contributions/new, which doesn't exist...
+		<%#<section>
+			<%= render 'shared/contribute' %>
+		<%#</section> %>
+
+		<section>
+			Help keep the Ninja afloat! <%= link_to "Contribute", 'contributions/new' %> to the good fight.
+			<br>
+			<%= link_to "Learn more", aboutcontributions_path %>
+		</section>
+
 	</aside>
 	<div class="span8">
 		<h3>Answered questions</h3>

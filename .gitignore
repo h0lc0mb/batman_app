@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+* Ignore stripe initializer
+/config/initializers/stripe.rb

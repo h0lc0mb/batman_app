@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828204515) do
+ActiveRecord::Schema.define(:version => 20131021232641) do
+
+  create_table "contributions", :force => true do |t|
+    t.float    "amount"
+    t.integer  "user_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "stripe_customer_token"
+  end
+
+  add_index "contributions", ["user_id", "created_at"], :name => "index_contributions_on_user_id_and_created_at"
 
   create_table "posts", :force => true do |t|
     t.text     "content",    :limit => 255

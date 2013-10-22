@@ -7,6 +7,9 @@
       <section>
         <%= render 'shared/post_form' %>
       </section>
+      <section>
+        <%= render 'shared/contribute' %>
+      </section>
     </aside>
     <div class="span8">
       <% if current_user.posts.any? %>
@@ -29,4 +32,19 @@
       Already initiated? <%= link_to "Sign in", signin_path %>
     </p></center></font>
   </div>
+  <ul>
+    <b>The Physics Ninja has been endorsed by the greatest scientists across spacetime:</b>
+  </ul>
+  <ul>
+    "I fucking love the Physics Ninja!!!!"
+    <br><i>Marie Curie, Nobel Laureate in physics and chemistry</i>
+  </ul>
+  <ul>
+    "I had nooo clue what was happening with my physics homework before I discovered the Physics Ninja! Now, I totally understand everything."
+    <br><i>Johannes Kepler, Astronomer & physicist</i>
+  </ul>
+  <ul>
+    "Even I can admit: The Ninja's got some sick moves."
+    <br><i>Isaac Newton, Physicst & mathematician</i>
+  </ul>
 <% end %> 

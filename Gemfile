@@ -7,6 +7,9 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 
+gem 'meta-tags', :require => 'meta_tags'
+gem 'stripe'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -21,7 +24,6 @@ end
 group :development do
 	gem 'annotate', '2.5.0'
 end
-
 
 # Gems used only for assets and not required
 # in production environments by default.

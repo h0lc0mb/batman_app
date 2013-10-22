@@ -12,6 +12,8 @@ BatmanApp::Application.routes.draw do
     resources :responses, only: [:create, :destroy]
   end
 
+  resources :contributions
+
   root to: 'static_pages#home'
   #root to: 'users#new'
 
@@ -22,6 +24,8 @@ BatmanApp::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   #match '/contact', to: 'static_pages#contact'
+  match '/aboutcontributions', to: 'static_pages#aboutcontributions'
+  match '/contribute',         to: 'static_pages#contribute'
 
   match 'pending',  to: 'posts#pending'
   match 'answered', to: 'posts#answered'

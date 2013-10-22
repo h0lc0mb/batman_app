@@ -11,4 +11,8 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+  def contribute
+  	@contribution = current_user.contributions.build if signed_in?
+  end
 end

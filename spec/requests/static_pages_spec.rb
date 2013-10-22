@@ -14,19 +14,17 @@ describe "StaticPages" do
 		describe "as signed in user" do
 			let(:user) { FactoryGirl.create(:user) }
 
-			before do
-				sign_in user
-				visit root_path
-			end
+			before { sign_in user }
 
 			let!(:p1) { FactoryGirl.create(:post, user: user, content: "What is rage?") }
 			let!(:p2) { FactoryGirl.create(:post, user: user, content: "What are conics?") }
 			let!(:p3) { FactoryGirl.create(:post, user: user, content: "This post has an answer!")}
 			let!(:r3) { FactoryGirl.create(:response, post: p3, content: "Yes, yes it does.") }
 
+			before { visit root_path }
+
 			describe "posts" do
 				it { should have_content('Pending') }
-				# These are failing, but it works in the app...
 				it { should have_content(p1.content) }
 				it { should have_content(p2.content) }
 				it { should_not have_content(p3.content) }
@@ -54,4 +52,11 @@ describe "StaticPages" do
 	#	it { should have_selector('h1', text: 'Contact') }
 	#	it { should have_selector('title', text: full_title('Contact')) }
 	#end
+
+	describe "Contribution info page" do
+		before { visit aboutcontributions_path }
+
+		it { should have_selector('h1', text: 'Why contribute?') }
+		it { should have_selector('title', text: full_title('Contribute')) }
+	end
 end

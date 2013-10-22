@@ -30,6 +30,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:posts) }
   it { should respond_to(:responses) }
+  it { should respond_to(:contributions) }
 
 	it { should be_valid }
   it { should_not be_admin }
