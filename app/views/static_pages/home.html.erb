@@ -1,27 +1,63 @@
 <% if signed_in? %>
-  <center><font size=5>Love the Ninja? Hate the Ninja? Help us help you! Fill out our 5-question feedback survey <a href="https://www.surveymonkey.com/s/ninjafeedback">here</a>.</font></center>
+  <div class="center">
+    <h1>Hello, <%= current_user.name %></h1>
+    <h4>Thank you for participating in Physics Ninja v1.0! We're taking the site down for a couple weeks in order to launch a new and improved version.</h4>
+  </div>
+  <div class="span12">
+    <p><font size=3>Still want awesome ninja physics help? Enter your email address below and we'll let you know when v2.0 is ready for prime time.</font></p>
+  </div>
   <div class="row">
+    <div class="span4 offset1">
+      <%= form_for(@post) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.text_field :content, placeholder: "Email" %>
+        </div>
+        <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+       <% end %>
+    </div>
+  </div>
+  <div class="span12">
+    <p><font size=3>Got any feedback for us? Let us hear it below! You can also check out our user survey <a href="https://www.surveymonkey.com/s/ninjafeedback">here</a>.</font></p>
+  </div>
+  <div class="row">
+    <div class="span6 offset1">
+      <%= form_for(@post) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.text_area :content, placeholder: "Tell us what you think!", rows: "3" %>
+        </div>
+        <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+       <% end %>
+    </div>
+  </div>
+  <div class="span12">
+    <p><font size=3>You can still view responses to your previous questions <%= link_to "here", current_user %>.</font></p>
+  </div>
+
+  <%#<center><font size=5>Love the Ninja? Hate the Ninja? Help us help you! Fill out our 5-question feedback survey <a href="https://www.surveymonkey.com/s/ninjafeedback">here</a>.</font></center>%>
+  <%#<div class="row">
     <aside class="span4">
       <section>
         <%= render 'shared/user_info' %>
-      </section>
+      <%#</section>
       <section>
         <%= render 'shared/post_form' %>
-      </section>
+      <%#</section>
       <%#<section>
         <%#= render 'shared/contribute' %>
       <%#</section>%>
-    </aside>
+    <%#</aside>
     <div class="span8">
-      <% if current_user.posts.any? %>
-        <h3>Pending questions</h3>
+      <%#<% if current_user.posts.any? %>
+        <%#<h3>Pending questions</h3>
         <ol class="posts">
           <%= render 'posts/pending_post', collection: @posts %>
-        </ol>
+        <%#</ol>
         <%#= will_paginate @posts %>
-      <% end %>
-    </div>
-  </div>
+      <%#<% end %>
+    <%#</div>
+  </div>%>
 <% else %>
   <div class="center hero-unit">
     <h1>Physics Ninja</h1>

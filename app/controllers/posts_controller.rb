@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def create
   	@post = current_user.posts.build(params[:post])
   	if @post.save
-  		flash[:success] = "Your question has been submitted to the ninja."
+  		flash[:success] = "Thanks! Your input has been submitted to the ninja."
   		redirect_to root_url
   	else
   		render 'static_pages/home'

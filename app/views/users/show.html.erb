@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<center><font size=5>Love the Ninja? Hate the Ninja? Help us help you! Fill out our 5-question feedback survey <a href="https://www.surveymonkey.com/s/ninjafeedback">here</a>.</font></center>
+<%#<center><font size=5>Love the Ninja? Hate the Ninja? Help us help you! Fill out our 5-question feedback survey <a href="https://www.surveymonkey.com/s/ninjafeedback">here</a>.</font></center>%>
 <div class="row">
 	<aside class="span4">
 		<section>
@@ -11,7 +11,7 @@
 			</span>
 			<br>
 			<span>
-				<%= link_to "ask a new question", root_path %>
+				<%= link_to "go to feedback page", root_path %>
 			</span>
 		</section>
 		<%# Currently won't work bc it tries to do users/contributions/new, which doesn't exist...
